@@ -23,7 +23,7 @@ contract UniswapV3PoolDeployer is IUniswapV3PoolDeployer {
     /// @param token0 The first token of the pool by address sort order
     /// @param token1 The second token of the pool by address sort order
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
-    /// @param tickSpacing The spacing between usable ticks
+    /// @param tickSpacing The spacing between usable ticks //tickSpacing tick的间距
     function deploy(
         address factory,
         address token0,

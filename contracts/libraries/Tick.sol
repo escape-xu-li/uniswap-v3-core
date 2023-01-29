@@ -42,9 +42,11 @@ library Tick {
     ///     e.g., a tickSpacing of 3 requires ticks to be initialized every 3rd tick i.e., ..., -6, -3, 0, 3, 6, ...
     /// @return The max liquidity per tick
     function tickSpacingToMaxLiquidityPerTick(int24 tickSpacing) internal pure returns (uint128) {
+        // 确保是tick spacing的倍数，重新调整min / max tick边界
         int24 minTick = (TickMath.MIN_TICK / tickSpacing) * tickSpacing;
         int24 maxTick = (TickMath.MAX_TICK / tickSpacing) * tickSpacing;
-        uint24 numTicks = uint24((maxTick - minTick) / tickSpacing) + 1;
+        uint24 numTicks = uint24((maxTick - minTick) / tickSpacing) + 1; // 可以详细探究下+1从哪里来的
+        //按照流动性的上限，均匀将流动性分摊到每个tick上
         return type(uint128).max / numTicks;
     }
 
